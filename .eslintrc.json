@@ -1,0 +1,14 @@
+{
+    "parserOptions": {
+      "ecmaVersion": 8,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "impliedStrict": true
+      }
+    },
+    "extends": "standard",
+    "env": {
+      "node": true,
+      "jest": true
+    }
+  }

@@ -1,0 +1,9 @@
+{
+    "testResultsProcessor": "./node_modules/jest-junit",
+    "testEnvironment": "node",
+    "collectCoverage": true,
+    "coverageReporters": ["text", "html", "json-summary"],
+    "collectCoverageFrom": [
+      "src/**/*.{js}"
+    ]
+  }
