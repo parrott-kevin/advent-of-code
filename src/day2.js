@@ -18,13 +18,8 @@ const part2 = (ary) => {
     for (let i = 0; i < item.length - 1; i++) {
       let found = false
       for (let j = i + 1; j < item.length; j++) {
-        if (item[i] % item[j] === 0) {
-          val = item[i] / item[j]
-          found = true
-          break
-        }
-        if (item[j] % item[i] === 0) {
-          val = item[j] / item[i]
+        if (item[i] % item[j] === 0 || item[j] % item[i] === 0) {
+          val = item[i] > item[j] ? item[i] / item[j] : item[j] / item[i]
           found = true
           break
         }
