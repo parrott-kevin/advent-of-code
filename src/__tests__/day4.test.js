@@ -51,7 +51,7 @@ describe('day 4', () => {
 
     test('puzzle', () => {
       const result = day4.part2(PUZZLE_INPUT)
-      const numberValid = 451
+      const numberValid = 223
       expect(result).toEqual(numberValid)
     })
   })
