@@ -124,6 +124,7 @@ const part2 = (input) => {
       return moveRight(x, y)
     }
   }
+
   const nextValue = (coords, valueAry) => {
     let sum = 0
     for (let v of valueAry) {
@@ -202,6 +203,7 @@ const part2 = (input) => {
     }
     done = newValue > input
   }
+
   return grid[i].values[grid[i].values.length - 1].value
 }
 
