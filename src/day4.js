@@ -1,14 +1,14 @@
 const part1 = (input) => {
-  const result = input.reduce((result, str) => {
-    return str.split(' ').length === [...new Set(str.split(' '))].length ? result += 1 : result
+  const result = input.reduce((sum, str) => {
+    return str.split(' ').length === [...new Set(str.split(' '))].length ? sum + 1 : sum
   }, 0)
   return result
 }
 
 const part2 = (input) => {
-  const result = input.reduce((result, str) => {
+  const result = input.reduce((sum, str) => {
     const deduped = [...new Set(str.split(' ').map(s => s.split('').sort().join('')))]
-    return str.split(' ').length === deduped.length ? result += 1 : result
+    return str.split(' ').length === deduped.length ? sum + 1 : sum
   }, 0)
   return result
 }
