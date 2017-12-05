@@ -1,6 +1,6 @@
 # Day 4: High-Entropy Passphrases
 
-## Part 1
+## Part One
 
 A new system policy has been put in place that requires all accounts to use a passphrase instead of simply a password. A passphrase consists of a series of words (lowercase letters) separated by spaces.
 
@@ -14,7 +14,7 @@ For example:
 
 The system's full passphrase list is available as your puzzle input. How many passphrases are valid?
 
-## Part 2
+## Part Two
 
 For added security, yet another system policy has been put in place. Now, a valid passphrase must contain no two words that are anagrams of each other - that is, a passphrase is invalid if any word's letters can be rearranged to form any other word in the passphrase.
 
