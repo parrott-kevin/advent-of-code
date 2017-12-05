@@ -1,17 +1,12 @@
 const traverse = (instructions, increment) => {
-  let done = false
   let i = 0
   let steps = 0
   let jump = instructions[i]
-  while (!done) {
-    if (i >= instructions.length) {
-      done = true
-    } else {
-      steps += 1
-      jump = instructions[i]
-      instructions[i] += increment(jump)
-      i += jump
-    }
+  while (i < instructions.length) {
+    steps += 1
+    jump = instructions[i]
+    instructions[i] += increment(jump)
+    i += jump
   }
   return steps
 }
