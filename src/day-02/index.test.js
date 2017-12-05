@@ -1,4 +1,4 @@
-const { part1, part2 } = require('../day02')
+const { part1, part2 } = require('./index')
 
 describe('day 2', () => {
   describe('part 1', () => {
