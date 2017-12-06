@@ -1,5 +1,5 @@
 const findLargest = (ary) => {
-  const sorted = [].concat(ary).sort()
+  const sorted = [...ary].sort((a, b) => a - b)
   const value = sorted.pop()
   const index = ary.indexOf(value)
   return {
@@ -16,29 +16,32 @@ const redistribute = (ary, val, index) => {
   }
   return ary
 }
-const part1 = (input) => {
+const realloaction = (input) => {
   const storage = [input]
   let done = false
+  let cycleDiff = 0
   while (!done) {
-    const clone = [].concat(storage[storage.length - 1])
+    const clone = [...storage[storage.length - 1]]
     const largest = findLargest(clone)
     clone[largest.index] = 0
     const distributedArray = redistribute(clone, largest.value, largest.index + 1)
-    for (let ary of storage) {
-      let test = []
-      for (let i = 0; i < ary.length; i++) {
-        test.push(ary[i] === distributedArray[i])
-      }
-      if ((test.filter(bool => bool === false)).length === 0) {
+    for (let i = 0; i < storage.length; i++) {
+      let ary = storage[i]
+
+      const same = (ary.length === distributedArray.length) && ary.every((element, index) => element === distributedArray[index])
+
+      if (same) {
+        cycleDiff = storage.length - i
         done = true
+        break
       }
     }
     storage.push(distributedArray)
   }
-  return storage.length - 1
+  return {
+    cycles: storage.length - 1,
+    cycleDiff
+  }
 }
 
-const part2 = (input) => {
-}
-
-module.exports = { part1, part2 }
+module.exports = { realloaction }
