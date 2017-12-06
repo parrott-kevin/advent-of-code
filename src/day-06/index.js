@@ -16,6 +16,7 @@ const redistribute = (ary, val, index) => {
   }
   return ary
 }
+
 const realloaction = (input) => {
   const storage = [input]
   let done = false

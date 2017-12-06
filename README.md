@@ -1,4 +1,7 @@
 # Advent of Code
+
+[![Build Status](https://travis-ci.org/parrott-kevin/advent-of-code.svg?branch=master)](https://travis-ci.org/parrott-kevin/advent-of-code)
+
 ## Setup
 Requirements
 * [yarn](https://yarnpkg.com/en/docs/install)
