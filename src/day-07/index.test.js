@@ -73,15 +73,16 @@ describe('day XXX', () => {
       cntj (57)`
       const decomposedInput = decompose(input.split(/\n/))
       const result = part2(decomposedInput)
-      const answer = 'tknk'
-      expect(result.program).toEqual(answer)
+      const answer = 60
+      expect(result).toEqual(answer)
     })
 
     test('puzzle', async () => {
-      // const input = await puzzleInput()
-      // const result = part2(input)
-      // const answer = true
-      // expect(result).toEqual(answer)
+      const input = await puzzleInput()
+      const decomposedInput = decompose(input)
+      const result = part2(decomposedInput)
+      const answer = 1853
+      expect(result).toEqual(answer)
     })
   })
 })
