@@ -47,10 +47,9 @@ const depthFirstInvestigate = (graph, root, rack) => {
   while (stack.length > 0) {
     let node = graph[stack.pop()]
     let weights = node.children.reduce((result, i) => {
-      if (!result[rack[i]]) {
-        result[rack[i]] = []
-      }
-      result[rack[i]].push(i)
+      const weight = rack[i]
+      !(weight in result) && (result[weight] = [])
+      result[weight].push(i)
       return result
     }, {})
 
