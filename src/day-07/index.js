@@ -16,61 +16,25 @@ const findParent = (obj, node) => {
   }
 }
 
-class Queue {
-  constructor () {
-    this.storage = {}
-    this.oldIndex = 0
-    this.newIndex = 0
+const depthFirstSumWeights = (graph, root) => {
+  let sum = root.weight
+  let stack = [...root.children]
+  while (stack.length > 0) {
+    let node = graph[stack.pop()]
+    sum += node.weight
+    if (node.children.length > 0) {
+      stack = [...stack, ...node.children]
+    }
   }
-
-  size () {
-    return this.newIndex - this.oldIndex
-  }
-
-  enqueue (node) {
-    this.storage[this.newIndex] = node
-    this.newIndex++
-  }
-
-  dequeue () {
-    const result = this.storage[this.oldIndex]
-
-    delete this.storage[this.oldIndex]
-    this.oldIndex++
-
-    return result
-  }
-}
-
-const breadthFirstWeight = (graph, root) => {
-  root.marked = true
-
-  let totalWeight = root.weight
-
-  let q = new Queue()
-  q.enqueue(root)
-  while (q.size() > 0) {
-    const node = q.dequeue()
-
-    node.children.forEach(n => {
-      const adjNode = graph[n]
-      if (!adjNode.marked) {
-        adjNode.marked = true
-        q.enqueue(adjNode)
-        totalWeight += adjNode.weight
-      }
-    })
-  }
-  return totalWeight
+  return sum
 }
 
 const depthFirstRackWeights = (graph, root) => {
   let rack = {}
   let stack = [root.program]
   while (stack.length > 0) {
-    let clone = JSON.parse(JSON.stringify(graph))
     let node = graph[stack.pop()]
-    let totalWeight = breadthFirstWeight(clone, node)
+    let totalWeight = depthFirstSumWeights(graph, node)
     rack[node.program] = totalWeight
     stack = stack.concat(node.children)
   }
@@ -79,10 +43,9 @@ const depthFirstRackWeights = (graph, root) => {
 
 const depthFirstInvestigate = (graph, root, rack) => {
   let stack = [root.program]
-  let clone = JSON.parse(JSON.stringify(graph))
   let results
   while (stack.length > 0) {
-    let node = clone[stack.pop()]
+    let node = graph[stack.pop()]
     let weights = node.children.reduce((result, i) => {
       if (!result[rack[i]]) {
         result[rack[i]] = []
@@ -97,7 +60,7 @@ const depthFirstInvestigate = (graph, root, rack) => {
       for (let key of weightKeys) {
         if (weights[key].length === 1) {
           if (!results || (results && results.children.includes(weights[key][0]))) {
-            results = Object.assign({}, clone[weights[key][0]])
+            results = Object.assign({}, graph[weights[key][0]])
             results.diff = diff
           }
         }
