@@ -46,9 +46,9 @@ const main = (input) => {
         storage[i.register] = storage[i.condition.right] !== i.condition.left ? storage[i.register] + i.add : storage[i.register]
         break
     }
-    const clone = Object.assign({}, storage)
-    const hCandidate = (Object.keys(clone)
-      .map(key => [key, clone[key]])
+
+    const hCandidate = (Object.keys(storage)
+      .map(key => [key, storage[key]])
       .sort((a, b) => a[1] - b[1])
       .pop()
     )[1]
