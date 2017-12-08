@@ -47,12 +47,7 @@ const main = (input) => {
         break
     }
 
-    const hCandidate = (Object.keys(storage)
-      .map(key => [key, storage[key]])
-      .sort((a, b) => a[1] - b[1])
-      .pop()
-    )[1]
-    highest = highest > hCandidate ? highest : hCandidate
+    highest = highest > storage[i.register] ? highest : storage[i.register]
   })
   const lastHighest = (Object.keys(storage)
     .map(key => [key, storage[key]])
