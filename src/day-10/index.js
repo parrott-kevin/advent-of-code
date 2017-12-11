@@ -1,104 +1,44 @@
-const knot = (list, lengthList, listPosition = 0, skip = 0) => {
-  for (let length of lengthList) {
-    let sublist
-    let sublistIndex = []
-    if (listPosition + length >= list.length) {
-      const backLength = list.length - listPosition
-      const frontLength = length - backLength
-      for (let i = listPosition; i < listPosition + backLength; i++) {
-        sublistIndex.push(i)
-      }
-      for (let i = 0; i < frontLength; i++) {
-        sublistIndex.push(i)
-      }
-      sublist = [...list.slice(listPosition, listPosition + backLength), ...list.slice(0, frontLength)]
-    } else {
-      sublist = list.slice(listPosition, listPosition + length)
-      for (let i = listPosition; i < listPosition + length; i++) {
-        sublistIndex.push(i)
-      }
-    }
-
-    let twist = sublist.reverse()
-    twist.forEach((value, index) => {
-      list[sublistIndex[index]] = value
-    })
-
-    if ((length + skip + listPosition) >= list.length) {
-      listPosition = (length + skip + listPosition) - list.length
-    } else {
-      listPosition = length + skip + listPosition
-    }
-    skip += 1
-  }
-
-  if ((list.length + listPosition) >= list.length) {
-    listPosition = (list.length + listPosition) - list.length
-  } else {
-    listPosition = list.length + listPosition
-  }
-
-  return {
-    listPosition,
-    skip,
-    list
-  }
-}
-const part1 = (input, end) => {
-  let list = []
-  for (let i = 0; i < end; i++) {
-    list.push(i)
-  }
-  const results = knot(list, input)
-  return results.list[0] * results.list[1]
-}
-
-const part2 = (input, end) => {
-  let list = []
-  for (let i = 0; i < end; i++) {
-    list.push(i)
-  }
-  const converted = input.reduce((result, value, index) => {
-    const str = value.toString()
-    for (let i = 0; i < str.length; i++) {
-      result.push(str[i].charCodeAt(0))
-    }
-    if (index !== input.length - 1) {
-      result.push(','.charCodeAt(0))
-    }
-    return result
-  }, [])
-
-  const lengthList = [...converted, ...[17, 31, 73, 47, 23]]
-  const rounds = 64
+const knot = (list, lengths, rounds) => {
+  let position = 0
   let skip = 0
-  let listPosition = 0
   for (let i = 0; i < rounds; i++) {
-    const results = knot(list, lengthList, listPosition, skip)
-    skip = results.skip
-    listPosition = results.listPosition
-    list = results.list
+    for (const length of lengths) {
+      if (position + length >= list.length) {
+        const sub = [...list.slice(position, position + length), ...list.slice(0, length - (list.length - position))].reverse()
+        const front = sub.slice(0, list.length - position)
+        const back = sub.slice(list.length - position)
+        list = [...back, ...list.slice(length - (list.length - position), position), ...front]
+      } else {
+        const sub = list.slice(position, position + length).reverse()
+        list = [...list.slice(0, position), ...sub, ...list.slice(position + length)]
+      }
+      position = (position + length + skip) % list.length
+      skip++
+    }
   }
-
   return list
-  // const sparseHash = [...list]
-  // const denseHash = []
-  // let hashStart = 0
-  // let hashEnd = 16
-  // while (hashEnd <= end) {
-  //   const block = sparseHash.slice(hashStart, hashEnd)
-  //   const xor = block.reduce((result, i) => result ^ i, 0)
-  //   denseHash.push(xor)
-  //   hashStart += 16
-  //   hashEnd += 16
-  // }
+}
 
-  // const hex = denseHash.reduce((result, i) => {
-  //   const h = i < 10 ? `0${i.toString(16)}` : i.toString(16)
-  //   result.push(h)
-  //   return result
-  // }, [])
-  // return hex.join('')
+const part1 = (input, listLength) => {
+  const lengths = [...input.split(',').map(s => parseInt(s, 10))]
+  const list = Array.from(Array(listLength).keys())
+  const results = knot(list, lengths, 1)
+  return results[0] * results[1]
+}
+
+const part2 = (input, listLength) => {
+  const list = Array.from(Array(listLength).keys())
+  const lengths = [...input.split('').map(s => s.charCodeAt(0)), ...[17, 31, 73, 47, 23]]
+  let rounds = 64
+
+  const sparseHash = knot(list, lengths, rounds)
+
+  const denseHash = Array.from(Array(16).keys())
+    .map(i => sparseHash.slice(i * 16, i * 16 + 16).reduce((r, i) => r ^ i, 0))
+
+  const hex = denseHash.reduce((result, i) => i < 10 ? `${result}0${i.toString(16)}` : `${result}${i.toString(16)}`, '')
+
+  return hex
 }
 
 module.exports = { part1, part2 }
