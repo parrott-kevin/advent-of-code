@@ -25,7 +25,7 @@ const decompose = (ary) => {
   }, {})
 }
 
-describe('day XXX', () => {
+describe('day 7', () => {
   describe('part 1', () => {
     test('example', () => {
       const input = `pbga (66)

@@ -9,7 +9,7 @@ const puzzleInput = async () => {
   return (await readFile(path.join(__dirname, './puzzleInput.txt'), 'utf8')).split(/\n/)
 }
 
-describe('day XXX', () => {
+describe('day 8', () => {
   describe('part 1', () => {
     test('example', () => {
       const input = [
