@@ -4,7 +4,7 @@ function depthFirstIterative (graph, root) {
 
   while (stack.length > 0) {
     const node = stack.pop()
-    if (visited.indexOf(node) < 0) {
+    if (!visited.includes(node)) {
       visited.push(node)
       stack = [...stack, ...graph[node]]
     }
@@ -34,7 +34,7 @@ const part2 = (input) => {
   let groups = []
   for (let key in programs) {
     const id = parseInt(key, 10)
-    if (visited.indexOf(id) < 0) {
+    if (!visited.includes(id)) {
       const dfi = depthFirstIterative(programs, id, 10)
       visited = [...visited, ...dfi]
       groups.push(dfi)
