@@ -43,12 +43,6 @@ function cubeDistance (a, b) {
   return (Math.abs(a.x - b.x) + Math.abs(a.y - b.y) + Math.abs(a.z - b.z)) / 2
 }
 
-const part1 = (input) => {
-  const originCube = { x: 0, y: 0, z: 0 }
-  const location = input.reduce((r, i) => moveCube(r, i), { x: 0, y: 0, z: 0 })
-  return cubeDistance(originCube, location)
-}
-
 const main = (input) => {
   const originCube = { x: 0, y: 0, z: 0 }
   const result = input.reduce((r, i) => {
