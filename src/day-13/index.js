@@ -22,30 +22,25 @@ const part1 = (firewall, maxDepth) => {
 const part2 = (firewall, maxDepth) => {
   let done = false
   let delay = 0
-  let packetPosition = 0
   let depths = Object.keys(firewall).map(i => parseInt(i, 10))
   while (!done) {
     let caught = false
-    for (let i = 0; i <= (maxDepth + delay); i++) {
-      if (packetPosition >= 0 && depths.includes(packetPosition)) {
-        const depth = firewall[packetPosition]
-        const rangePosition = triangle(depth.range - 1, i)
+    for (let i = 0; i <= maxDepth; i++) {
+      if (i >= 0 && depths.includes(i)) {
+        const depth = firewall[i]
+        const rangePosition = triangle(depth.range - 1, i + delay)
         if (rangePosition === 0) {
           caught = true
           break
         }
       }
-      // console.log(i, packetPosition, (packetPosition in firewall), caught)
-      packetPosition++
     }
     if (caught) {
       delay++
-      packetPosition = -1 * delay
     } else {
       done = true
     }
   }
-
   return delay
 }
 

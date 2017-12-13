@@ -82,7 +82,7 @@ describe('day 13', () => {
       const input = await puzzleInput()
       const maxDepth = parseInt(Object.keys(input).pop(), 10)
       const result = part2(input, maxDepth)
-      const answer = 10
+      const answer = 3903378
       expect(result).toEqual(answer)
     })
   })
