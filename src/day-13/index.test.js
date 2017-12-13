@@ -9,7 +9,7 @@ const puzzleInput = async () => {
   return (await readFile(path.join(__dirname, './puzzleInput.txt'), 'utf8')).split(/\n/).reduce((storage, i) => {
     const row = i.split(':')
     storage[row[0]] = {
-      range: row[1],
+      range: parseInt(row[1], 10),
       position: 0
     }
     return storage
@@ -37,14 +37,16 @@ describe('day 13', () => {
           position: 0
         }
       }
-      const result = part1(input, parseInt(Object.keys(input).pop(), 10))
+      const maxDepth = parseInt(Object.keys(input).pop(), 10)
+      const result = part1(input, maxDepth)
       const answer = 24
       expect(result).toEqual(answer)
     })
 
     test('puzzle', async () => {
       const input = await puzzleInput()
-      const result = part1(input, parseInt(Object.keys(input).pop(), 10))
+      const maxDepth = parseInt(Object.keys(input).pop(), 10)
+      const result = part1(input, maxDepth)
       const answer = 1960
       expect(result).toEqual(answer)
     })
@@ -70,14 +72,16 @@ describe('day 13', () => {
           position: 0
         }
       }
-      const result = part2(input, parseInt(Object.keys(input).pop(), 10))
+      const maxDepth = parseInt(Object.keys(input).pop(), 10)
+      const result = part2(input, maxDepth)
       const answer = 10
       expect(result).toEqual(answer)
     })
 
     test('puzzle', async () => {
       const input = await puzzleInput()
-      const result = part2(input, parseInt(Object.keys(input).pop(), 10))
+      const maxDepth = parseInt(Object.keys(input).pop(), 10)
+      const result = part2(input, maxDepth)
       const answer = 10
       expect(result).toEqual(answer)
     })
