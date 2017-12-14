@@ -19,16 +19,9 @@ const knot = (list, lengths, rounds) => {
   return list
 }
 
-const part1 = (input, listLength) => {
-  const lengths = [...input.split(',').map(s => parseInt(s, 10))]
+const knotHash = (input, listLength = 256, suffix = [17, 31, 73, 47, 23]) => {
   const list = Array.from(Array(listLength).keys())
-  const results = knot(list, lengths, 1)
-  return results[0] * results[1]
-}
-
-const part2 = (input, listLength) => {
-  const list = Array.from(Array(listLength).keys())
-  const lengths = [...input.split('').map(s => s.charCodeAt(0)), ...[17, 31, 73, 47, 23]]
+  const lengths = [...input.split('').map(s => s.charCodeAt(0)), ...suffix]
   let rounds = 64
 
   const sparseHash = knot(list, lengths, rounds)
@@ -41,4 +34,15 @@ const part2 = (input, listLength) => {
   return hex
 }
 
-module.exports = { part1, part2 }
+const part1 = (input, listLength) => {
+  const lengths = [...input.split(',').map(s => parseInt(s, 10))]
+  const list = Array.from(Array(listLength).keys())
+  const results = knot(list, lengths, 1)
+  return results[0] * results[1]
+}
+
+const part2 = (input, listLength) => {
+  return knotHash(input, listLength)
+}
+
+module.exports = { part1, part2, knotHash }
