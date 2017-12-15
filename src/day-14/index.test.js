@@ -21,10 +21,10 @@ describe('day 14', () => {
 
   describe('part 2', () => {
     test('example', () => {
-      // const input = []
-      // const result = part2(input)
-      // const answer = true
-      // expect(result).toEqual(answer)
+      const input = 'flqrgnkx'
+      const result = part2(input)
+      const answer = 1242
+      expect(result).toEqual(answer)
     })
 
     test('puzzle', async () => {
