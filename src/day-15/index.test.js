@@ -1,43 +1,30 @@
-const fs = require('fs')
-const util = require('util')
-const path = require('path')
-
 const { part1, part2 } = require('./index')
 
-const readFile = util.promisify(fs.readFile)
-const puzzleInput = async () => {
-  return (await readFile(path.join(__dirname, './puzzleInput.txt'), 'utf8')).split(/\n/).map(i => parseInt(i, 10))
-}
-
-describe('day XXX', () => {
+describe('day 15', () => {
   describe('part 1', () => {
     test('example', () => {
-      const input = []
-      const result = part1(input)
-      const answer = true
+      const result = part1(65, 8921)
+      const answer = 588
       expect(result).toEqual(answer)
     })
 
     test('puzzle', async () => {
-      const input = await puzzleInput()
-      const result = part1(input)
-      const answer = true
+      const result = part1(873, 583)
+      const answer = 631
       expect(result).toEqual(answer)
     })
   })
 
   describe('part 2', () => {
     test('example', () => {
-      const input = []
-      const result = part2(input)
-      const answer = true
+      const result = part2(65, 8921)
+      const answer = 309
       expect(result).toEqual(answer)
     })
 
     test('puzzle', async () => {
-      const input = await puzzleInput()
-      const result = part2(input)
-      const answer = true
+      const result = part2(873, 583)
+      const answer = 279
       expect(result).toEqual(answer)
     })
   })
