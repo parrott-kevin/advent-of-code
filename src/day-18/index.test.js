@@ -30,24 +30,30 @@ describe('day 18', () => {
     test('puzzle', async () => {
       const input = await puzzleInput()
       const result = part1(input)
-      const answer = true
+      const answer = 8600
       expect(result).toEqual(answer)
     })
   })
 
   describe('part 2', () => {
     test('example', () => {
-      // const input = []
-      // const result = part2(input)
-      // const answer = true
-      // expect(result).toEqual(answer)
+      const input = `snd 1
+      snd 2
+      snd p
+      rcv a
+      rcv b
+      rcv c
+      rcv d`
+      const result = part2(input)
+      const answer = 3
+      expect(result).toEqual(answer)
     })
 
     test('puzzle', async () => {
-      // const input = await puzzleInput()
-      // const result = part2(input)
-      // const answer = true
-      // expect(result).toEqual(answer)
+      const input = await puzzleInput()
+      const result = part2(input)
+      const answer = true
+      expect(result).toEqual(answer)
     })
   })
 })
